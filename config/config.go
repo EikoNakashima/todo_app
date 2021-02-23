@@ -1,6 +1,11 @@
 package config
 
-import "log"
+import (
+	"log"
+
+	"github.com/EikoNakashima/todo_app/utils"
+	"gopkg.in/go-ini/ini.v1"
+)
 
 type ConfigList struct {
 	Port      string
@@ -11,9 +16,10 @@ type ConfigList struct {
 
 var Config ConfigList
 
-func init(
+func init() {
 	LoadConfig()
-)
+	utils.LoggingSettings(Config.LogFile)
+}
 
 func LoadConfig() {
 	cfg, err := ini.Load("config.ini")
